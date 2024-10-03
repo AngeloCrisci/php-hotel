@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PHP HOTEL</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
     </head>
 
 <body>
@@ -50,11 +51,33 @@ $hotels = [
 
 ];
 
+$has_parking = isset($_GET["parking"]);
+
 ?>
 
 <h1 class="text-center m-4">
     HOTELS
 </h1>
+
+
+
+<div class="container">
+    <form action="" method="GET">
+        <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="checkbox" id="parking" name="parking"
+            <?php if ($has_parking) echo 'checked'; ?>
+            >
+            <label for="parking" class="from-check-label ms-3 fw-bold">
+                Cerca solo gli Hotel che hanno il parcheggio
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">CERCA!</button>
+        </div>
+    </form>
+</div>
+
+
 
 <div class="container">
     <table class="table table-striped">
@@ -70,14 +93,16 @@ $hotels = [
     <tbody>
         <tr>
         <?php  
-        foreach($hotels as $hotel) { ?>
+        foreach($hotels as $hotel) { 
+            if(!$has_parking || $hotel["parking"]) {
+            ?>
         <td><?= $hotel["name"]; ?></td>
         <td><?= $hotel["description"]; ?></td>
         <td><?= $hotel["parking"] ? "si" : "no"; ?></td>
         <td><?= $hotel["vote"]; ?></td>
         <td><?= $hotel["distance_to_center"]; ?></td>
         </tr>
-        <?php } ?>
+        <?php } }?>
     </tbody>
     </table>
 </div>
