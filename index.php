@@ -52,5 +52,15 @@ $hotels = [
 ];
 
 ?>
+
+<?php  
+    foreach($hotels as $hotel) { ?>
+    <?= $hotel["name"]; ?>
+    <?= $hotel["description"]; ?>
+    <?= $hotel["parking"] ? "si" : "no"; ?>
+    <?= $hotel["vote"]; ?>
+    <?= $hotel["distance_to_center"]; ?>
+    <?php } ?>
+
 </body>
 </html>
